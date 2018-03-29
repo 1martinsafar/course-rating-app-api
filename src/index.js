@@ -13,7 +13,10 @@ const db = mongoose.connection;
 // MongoDB errror
 db.on("error", err => console.error("connection error:", err));
 // MongoDB ready
-db.once("open", () => console.log("db connection successful"));
+db.once("open", () => {
+  console.log("db connection successful");
+  // All database communication goes here
+});
 
 // set our port
 app.set("port", process.env.PORT || 5000);
