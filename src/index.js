@@ -1,11 +1,19 @@
 "use strict";
 
-// load modules
+// Models
+var User = require("./models/userSchema");
+var Step = require("./models/stepSchema");
+var Review = require("./models/reviewSchema");
+var Course = require("./models/courseSchema");
+
+// Modules
 const express = require("express");
 const app = express();
 
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+
+
 
 // MongoDB connection
 mongoose.connect("mongodb://localhost:27017/courses");
@@ -16,7 +24,10 @@ db.on("error", err => console.error("connection error:", err));
 db.once("open", () => {
   console.log("db connection successful");
   // All database communication goes here
+
 });
+
+
 
 // set our port
 app.set("port", process.env.PORT || 5000);
