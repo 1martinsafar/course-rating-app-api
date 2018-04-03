@@ -2,7 +2,9 @@
 
 const mongoose = require("mongoose");
 
-const StepSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const StepSchema = new Schema({
   stepNumber: {
     type: Number
   },

@@ -2,7 +2,9 @@
 
 const mongoose = require("mongoose");
 
-const ReviewSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const ReviewSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId
   },
@@ -23,4 +25,4 @@ const ReviewSchema = new mongoose.Schema({
 });
 
 const Review = mongoose.model("Review", ReviewSchema);
-module.exports = Step;
+module.exports = Review;

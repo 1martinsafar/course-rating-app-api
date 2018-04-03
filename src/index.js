@@ -1,10 +1,10 @@
 "use strict";
 
 // Models
-var User = require("./models/userSchema");
-var Step = require("./models/stepSchema");
-var Review = require("./models/reviewSchema");
-var Course = require("./models/courseSchema");
+const User = require("./models/userSchema");
+const Step = require("./models/stepSchema");
+const Review = require("./models/reviewSchema");
+const Course = require("./models/courseSchema");
 
 // Modules
 const express = require("express");
@@ -13,21 +13,43 @@ const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 
-
+// Mongoose-seeder
+const seeder = require('mongoose-seeder');
+const data = require('./data/data.json');
 
 // MongoDB connection
-mongoose.connect("mongodb://localhost:27017/courses");
+mongoose.connect("mongodb://localhost:27017/course-rating-app");
 const db = mongoose.connection;
 // MongoDB errror
 db.on("error", err => console.error("connection error:", err));
 // MongoDB ready
-db.once("open", () => {
-  console.log("db connection successful");
-  // All database communication goes here
+// db.once("open", function() {
+//   console.log("db connection successful");
+//   // All database communication goes here
+//   seeder.seed(data).then(function(dbData) {
+//       // The database objects are stored in dbData
+//       console.log("The database objects are stored in dbData");
+//   }).catch(function(err) {
+//       // handle error
+//       console.log("Error Seeding the database with data!");
+//   });
+// });
 
+// mongoose.connection.on('connected', function() {
+//     seeder.seed(data);
+// });
+
+mongoose.connection.on("connected", function(ref) {
+  console.log("\n\nConnected!\n\n");
+  seeder.seed(data, {dropDatabase: false}).then(function(dbData) {
+      // The database objects are stored in dbData
+      console.log("The database objects are stored in dbData");
+  }).catch(function(err) {
+      // handle error
+      console.log("Error Seeding the database with data!");
+      console.log(err);
+  });
 });
-
-
 
 // set our port
 app.set("port", process.env.PORT || 5000);

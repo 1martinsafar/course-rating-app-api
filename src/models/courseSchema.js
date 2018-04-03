@@ -1,8 +1,13 @@
 "use strict";
 
+// Subdocuments
+const Step = require("./stepSchema");
+
 const mongoose = require("mongoose");
 
-const CourseSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const CourseSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId
   },
@@ -23,7 +28,7 @@ const CourseSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  steps: [StepSchema],
+  steps: [Step.schema],
   reviews: [Schema.Types.ObjectId]
 });
 

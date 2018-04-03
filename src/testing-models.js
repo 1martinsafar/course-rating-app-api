@@ -215,6 +215,20 @@ db.once("open", () => {
     next();
   });
 
+  // Mongoose-seeder
+  const seeder = require('mongoose-seeder');
+  const data = require('./data/data.json');
+
+  seeder.seed(data, {dropDatabase: false}).then(function(dbData) {
+      // The database objects are stored in dbData
+      console.log("The database objects are stored in dbData");
+  }).catch(function(err) {
+      // handle error
+      console.log("Error Seeding the database with data!");
+      console.log(err);
+  });
+
+
   // User.remove({"fullName": "FullName2"}, function(err) {
   //   if (err) { console.log("Error Removing USER."); }
   //   User.create(userData, function(err, users) {
@@ -264,6 +278,9 @@ db.once("open", () => {
   // });
 
 });
+
+
+
 
 
 // MONGO CONSOLE COMMANDS
